@@ -9,7 +9,7 @@ import { TiWeatherCloudy, TiWeatherShower } from "react-icons/ti";
 export const Box = ({ weather, hoursWeather }) => {
   // console.log(weather);
   const [icon, setIcon] = useState("");
-  const weatherList = hoursWeather?.list.slice(2, 9);
+  const weatherList = hoursWeather?.list.slice(2, 10);
   let status = weather?.weather[0].main;
 
   const weatherIcon = () => {
