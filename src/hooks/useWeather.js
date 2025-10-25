@@ -4,6 +4,7 @@ export default function useWeather(API_KEY) {
   const [weather, setWeather] = useState(null);
   const [query, setQuery] = useState(null);
   const [hoursWeather, setHoursWeather] = useState(null);
+  const [loading, setLoading] = useState(true);
   const getCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
       let lat = position.coords.latitude;
@@ -16,6 +17,7 @@ export default function useWeather(API_KEY) {
   // 현재 위치 기반 날씨 갖고오기
   const getCurrentWeather = async (lat, lon) => {
     try {
+      setLoading(true);
       let res = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`
       );
@@ -23,6 +25,8 @@ export default function useWeather(API_KEY) {
       setWeather(data);
     } catch (err) {
       console.error(err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -53,6 +57,7 @@ export default function useWeather(API_KEY) {
   //   도시 별 날씨
   const getCountryWeather = async (query) => {
     try {
+      setLoading(true);
       let res = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${API_KEY}&units=metric`
       );
@@ -60,6 +65,8 @@ export default function useWeather(API_KEY) {
       setWeather(data);
     } catch (err) {
       console.error(err);
+    } finally {
+      setLoading(false);
     }
   };
   useEffect(() => {
@@ -70,5 +77,5 @@ export default function useWeather(API_KEY) {
     if (query === null) getCurrentLocation();
   }, [query]);
 
-  return { weather, hoursWeather, query, setQuery };
+  return { weather, hoursWeather, query, setQuery, loading };
 }

@@ -2,11 +2,12 @@ import { Box } from "./components/Box";
 import "./App.css";
 import { WeatherButton } from "./components/WeatherButton";
 import useWeather from "./hooks/useWeather";
+import { ClipLoader } from "react-spinners";
 
 function App() {
   // API KEY
   const API_KEY = import.meta.env.VITE_API_KEY;
-  const { weather, hoursWeather, setQuery } = useWeather(API_KEY);
+  const { weather, hoursWeather, setQuery, loading } = useWeather(API_KEY);
 
   return (
     <>
@@ -24,7 +25,13 @@ function App() {
             : "snow"
         }`}
       >
-        <Box weather={weather} hoursWeather={hoursWeather} />
+        {loading ? (
+          <div className="box load">
+            <ClipLoader className="loading" size={150} />
+          </div>
+        ) : (
+          <Box weather={weather} hoursWeather={hoursWeather} />
+        )}
         <WeatherButton setQuery={setQuery} />
       </main>
     </>

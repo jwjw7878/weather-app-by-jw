@@ -43,6 +43,12 @@ main.mist {
   -webkit-backdrop-filter: blur(8px);
   color: white;
 }
+.box.load {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 80px;
+}
 .location {
   width: 80%;
   margin: 20px auto 30px;
