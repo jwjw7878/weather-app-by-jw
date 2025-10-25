@@ -165,3 +165,12 @@ main.snow {
     flex-wrap: wrap;
   }
 }
+@media (min-width: 1800px) {
+  main {
+    justify-content: center;
+  }
+  .country-btn {
+    padding: 12px;
+    font-size: 24px;
+  }
+}
