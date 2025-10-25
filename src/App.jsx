@@ -7,7 +7,8 @@ import { ClipLoader } from "react-spinners";
 function App() {
   // API KEY
   const API_KEY = import.meta.env.VITE_API_KEY;
-  const { weather, hoursWeather, setQuery, loading } = useWeather(API_KEY);
+  const { weather, hoursWeather, tempUnit, setQuery, setTempUnit, loading } =
+    useWeather(API_KEY);
 
   return (
     <>
@@ -30,7 +31,12 @@ function App() {
             <ClipLoader className="loading" size={150} />
           </div>
         ) : (
-          <Box weather={weather} hoursWeather={hoursWeather} />
+          <Box
+            weather={weather}
+            hoursWeather={hoursWeather}
+            setTempUnit={setTempUnit}
+            tempUnit={tempUnit}
+          />
         )}
         <WeatherButton setQuery={setQuery} />
       </main>

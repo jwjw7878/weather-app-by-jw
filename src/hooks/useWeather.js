@@ -1,9 +1,15 @@
 import { useEffect, useState } from "react";
 
 export default function useWeather(API_KEY) {
+  // 날씨 데이터
   const [weather, setWeather] = useState(null);
+  // 도시 쿼리
   const [query, setQuery] = useState(null);
+  //  시간별 날씨
   const [hoursWeather, setHoursWeather] = useState(null);
+  // 날씨 단위
+  const [tempUnit, setTempUnit] = useState("metric");
+  //  로딩 스피너 상태
   const [loading, setLoading] = useState(true);
   const getCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -19,7 +25,7 @@ export default function useWeather(API_KEY) {
     try {
       setLoading(true);
       let res = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=${tempUnit}`
       );
       let data = await res.json();
       setWeather(data);
@@ -34,7 +40,7 @@ export default function useWeather(API_KEY) {
   const getHoursWeather = async (lat, lon) => {
     try {
       let res = await fetch(
-        `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=${tempUnit}`
       );
       let data = await res.json();
       setHoursWeather(data);
@@ -46,7 +52,7 @@ export default function useWeather(API_KEY) {
   const getCountriesHoursWeather = async (query) => {
     try {
       let res = await fetch(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${query}&appid=${API_KEY}&units=metric`
+        `https://api.openweathermap.org/data/2.5/forecast?q=${query}&appid=${API_KEY}&units=${tempUnit}`
       );
       let data = await res.json();
       setHoursWeather(data);
@@ -59,7 +65,7 @@ export default function useWeather(API_KEY) {
     try {
       setLoading(true);
       let res = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${API_KEY}&units=metric`
+        `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${API_KEY}&units=${tempUnit}`
       );
       let data = await res.json();
       setWeather(data);
@@ -75,7 +81,15 @@ export default function useWeather(API_KEY) {
       getCountriesHoursWeather(query);
     }
     if (query === null) getCurrentLocation();
-  }, [query]);
+  }, [query, tempUnit]);
 
-  return { weather, hoursWeather, query, setQuery, loading };
+  return {
+    weather,
+    hoursWeather,
+    tempUnit,
+    setTempUnit,
+    query,
+    setQuery,
+    loading,
+  };
 }

@@ -6,7 +6,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import { SiAccuweather } from "react-icons/si";
 import { TiWeatherCloudy, TiWeatherShower } from "react-icons/ti";
 
-export const Box = ({ weather, hoursWeather }) => {
+export const Box = ({ weather, hoursWeather, tempUnit, setTempUnit }) => {
   const [icon, setIcon] = useState("");
   const weatherList = hoursWeather?.list.slice(2, 10);
   let status = weather?.weather[0].main;
@@ -35,9 +35,30 @@ export const Box = ({ weather, hoursWeather }) => {
       <div className="temp-weather">
         <div>
           <p className="temp-text">
-            <FaTemperatureHigh /> 기온
+            <FaTemperatureHigh />
+            <div className="temp-unit">
+              <button
+                className={
+                  tempUnit === "metric" ? "temp-btn active" : "temp-btn"
+                }
+                onClick={() => setTempUnit("metric")}
+              >
+                °C
+              </button>
+              <button
+                className={
+                  tempUnit === "imperial" ? "temp-btn active" : "temp-btn"
+                }
+                onClick={() => setTempUnit("imperial")}
+              >
+                °F
+              </button>
+            </div>
           </p>
-          <h1>{weather?.main.temp.toFixed(1)} °C</h1>
+          <h1>
+            {weather?.main.temp.toFixed(1)}
+            {tempUnit === "metric" ? "°C" : "°F"}
+          </h1>
         </div>
         <div className="icon-area">
           <h2>{icon}</h2>
@@ -52,7 +73,10 @@ export const Box = ({ weather, hoursWeather }) => {
               src={`https://openweathermap.org/img/wn/${list.weather[0].icon}@2x.png`}
               alt="icon"
             />
-            <p className="temp">{list.main.temp.toFixed(1)} °C</p>
+            <p className="temp">
+              {list.main.temp.toFixed(1)}
+              {tempUnit === "metric" ? "°C" : "°F"}
+            </p>
           </div>
         ))}
       </div>
