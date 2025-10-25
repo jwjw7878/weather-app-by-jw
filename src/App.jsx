@@ -19,6 +19,8 @@ function App() {
             ? "cloud"
             : weather?.weather[0].main === "Rain"
             ? "rain"
+            : weather?.weather[0].main === "Mist"
+            ? "mist"
             : "snow"
         }`}
       >
