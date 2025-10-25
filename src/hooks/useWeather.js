@@ -8,7 +8,7 @@ export default function useWeather(API_KEY) {
     navigator.geolocation.getCurrentPosition((position) => {
       let lat = position.coords.latitude;
       let lon = position.coords.longitude;
-      console.log("현재위치:", lat, lon);
+
       getCurrentWeather(lat, lon);
       getHoursWeather(lat, lon);
     });

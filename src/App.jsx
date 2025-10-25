@@ -8,7 +8,6 @@ function App() {
   const API_KEY = import.meta.env.VITE_API_KEY;
   const { weather, hoursWeather, setQuery } = useWeather(API_KEY);
 
-  console.log(hoursWeather);
   return (
     <>
       {/* 날씨 상태에 따른 배경 이미지 변경 */}
