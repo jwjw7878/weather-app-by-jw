@@ -1,10 +1,10 @@
 import React from "react";
 
-export const WeatherButton = ({ setQuery }) => {
+export const WeatherButton = ({ setQuery, query }) => {
   return (
     <div className="btn-area">
       <button
-        className="country-btn"
+        className={query === null ? "country-btn located" : "country-btn"}
         onClick={() => {
           setQuery(null);
         }}
@@ -12,7 +12,7 @@ export const WeatherButton = ({ setQuery }) => {
         Current Location
       </button>
       <button
-        className="country-btn"
+        className={query === "tokyo" ? "country-btn located" : "country-btn"}
         onClick={() => {
           setQuery("tokyo");
         }}
@@ -24,7 +24,7 @@ export const WeatherButton = ({ setQuery }) => {
         <p>Tokyo</p>
       </button>
       <button
-        className="country-btn"
+        className={query === "paris" ? "country-btn located" : "country-btn"}
         onClick={() => {
           setQuery("paris");
         }}
@@ -36,7 +36,7 @@ export const WeatherButton = ({ setQuery }) => {
         <p>Paris</p>
       </button>
       <button
-        className="country-btn"
+        className={query === "new york" ? "country-btn located" : "country-btn"}
         onClick={() => {
           setQuery("new york");
         }}
@@ -48,7 +48,7 @@ export const WeatherButton = ({ setQuery }) => {
         <p>New york</p>
       </button>
       <button
-        className="country-btn"
+        className={query === "london" ? "country-btn located" : "country-btn"}
         onClick={() => {
           setQuery("london");
         }}

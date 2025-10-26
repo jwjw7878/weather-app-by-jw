@@ -158,6 +158,10 @@ main.mist {
   font-weight: bold;
   cursor: pointer;
 }
+.country-btn.located {
+  background-color: white;
+  color: rgba(146, 146, 146, 0.4);
+}
 .country-btn img {
   width: 24px;
 }

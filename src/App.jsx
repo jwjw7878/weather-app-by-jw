@@ -7,8 +7,15 @@ import { ClipLoader } from "react-spinners";
 function App() {
   // API KEY
   const API_KEY = import.meta.env.VITE_API_KEY;
-  const { weather, hoursWeather, tempUnit, setQuery, setTempUnit, loading } =
-    useWeather(API_KEY);
+  const {
+    weather,
+    hoursWeather,
+    tempUnit,
+    query,
+    setQuery,
+    setTempUnit,
+    loading,
+  } = useWeather(API_KEY);
 
   return (
     <>
@@ -38,7 +45,7 @@ function App() {
             tempUnit={tempUnit}
           />
         )}
-        <WeatherButton setQuery={setQuery} />
+        <WeatherButton setQuery={setQuery} query={query} />
       </main>
     </>
   );
